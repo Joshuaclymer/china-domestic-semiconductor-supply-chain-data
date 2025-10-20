@@ -7,6 +7,26 @@ This data shows the technological progress of China's indigenous semiconductor e
   <figcaption>Figure 1. ASML TWINSCAN DUV Scanner used in 7 nm process lithography.</figcaption>
 <figure>
 
+### How to use this code
+
+To generate the plot above, run the following:
+`plot_capabilities.py 'both'`
+
+The data is split between four files:
+- `china_pilot.csv`: when equipment domestically produced in China first passed validation.
+- `china_hvm.csv`: when equipment domestically produced in China was first suitable for high volume manufacturing (HVM)
+- `world_pilot.csv`: when equipment produced globally first passed validation.
+- `world_hvm.csv`: when equipment produced globally was first suitable for high volume manufacturing (HVM).
+
+For an explanation of this data and sources, refer to:
+- `china.csv`
+- `world.csv`
+
+Each cell in `china.csv` and `world.csv` is in the following format:
+
+```[pilot year range, or N/A if there was never a pilot]; [HVM ready year range, or N/A if the tools was never HVM ready];[real and correct url of source for pilot year, ideally a primary source];[direct quote from source justifying pilot year range in the original language];[date of source publication];[explanation of why the quote justifies the pilot year and any additional context, such as the name of the first tool that exceeded the milestone, and uncertainties];[confidence in the provided date, either 'guess,' 'reliable inference,' 'direct quote from secondary source,' or 'direct quote from primary source'];[real and correct url of source for HVM ready year, ideally a primary source];[direct quote from source justifying HVM ready year in the original language];[date of source publication];[explanation of why the quote justifies the pilot year and any additional context, such as the name of the first tool that exceeded the milestone, or uncertainties];[confidence in the provided date, either 'guess,' 'reliable inference,' 'direct quote from secondary source,' or 'direct quote from primary source']```
+
+
 ### Data collection procedure
 
 I used Claude Sonnet 4.5 to collect this data from online sources. I asked Claude to collect quotes from specific websites (ideally primary sources such as investor reports released by Chinese companies). These quotes and source urls are located at `china.csv` and `world.csv`.
@@ -47,13 +67,11 @@ Here's an example for the tool "DUV scanner":
 Now please do extensive reasoning and research, and then provide an analysis of the timeline of the development of [tool], completing your response with a markdown table like the one above.
 ```
 
-I read each entry and explanation written by Claude Sonnet 4.5, often asking clarifying questions and suggesting corrections or changes.
+During the data generation process, I read each entry and explanation written by Claude Sonnet 4.5, often asking clarifying questions and suggesting corrections or changes.
 
-Then, I performed a spot check of several entries to verify that:
-1. The url was valid.
-2. The url included the provided quote.
+Then, I performed a spot check of several entries to verify that the provided url was valid, and included the provided quote.
 
-Then, to acquire data on global semiconductor capabilities, I applied a similar process with a modified prompt:
+Next, to acquire data on global semiconductor capabilities, I applied a similar process with a modified prompt:
 
 ```
 I want you to help me document how the semiconductor manufacturing industry has advanced over time—specifically, how [tools] have advanced.
